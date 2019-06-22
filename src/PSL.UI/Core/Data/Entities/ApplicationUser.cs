@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -15,5 +16,8 @@ namespace PSL.UI.Core.Data.Entities
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<Order> Orders { get; set; }
+
     }
 }
