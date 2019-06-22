@@ -12,6 +12,7 @@ namespace PSL.UI.Core.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
