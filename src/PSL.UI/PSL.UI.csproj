@@ -183,9 +183,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Migrations\201906220714558_InitDb.cs" />
     <Compile Include="Migrations\201906220714558_InitDb.Designer.cs">
       <DependentUpon>201906220714558_InitDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906221005026_PrepareProductAndOrder.cs" />
+    <Compile Include="Migrations\201906221005026_PrepareProductAndOrder.Designer.cs">
+      <DependentUpon>201906221005026_PrepareProductAndOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -201,6 +206,7 @@
     <Content Include="Assets\css\bootstrap-theme.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\PagedList.css" />
     <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\img\logo.png" />
@@ -243,6 +249,9 @@
     <EmbeddedResource Include="Migrations\201906220714558_InitDb.resx">
       <DependentUpon>201906220714558_InitDb.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906221005026_PrepareProductAndOrder.resx">
+      <DependentUpon>201906221005026_PrepareProductAndOrder.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
@@ -251,9 +260,7 @@
     <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

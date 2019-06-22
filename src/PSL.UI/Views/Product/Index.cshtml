@@ -1,3 +1,18 @@
-﻿@{
-    ViewBag.Title = "Product Listing";
+﻿@model IPagedList<Product>
+@{
+    ViewBag.Title = "List of Products";
 }
+
+@section styles
+{
+    <link href="~/Assets/css/PagedList.css" rel="stylesheet" />
+}
+
+<ul>
+    @foreach (var product in Model)
+    {
+     <li>@product.Name (@product.Inventory items are in stock)</li>
+    }
+</ul>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

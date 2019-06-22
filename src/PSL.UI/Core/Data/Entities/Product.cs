@@ -17,6 +17,10 @@ namespace PSL.UI.Core.Data.Entities
         [StringLength(800)]
         public string Description { get; set; }
 
+        public decimal Price { get; set; }
+
+        public int Inventory { get; set; }
+
         public virtual ICollection<Order> Orders { get; set; }
 
     }

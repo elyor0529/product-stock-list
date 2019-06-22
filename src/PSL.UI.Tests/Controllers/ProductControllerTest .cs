@@ -15,7 +15,7 @@ namespace PSL.UI.Tests.Controllers
             var controller = new ProductController();
 
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = controller.Index(0) as ViewResult;
 
             // Assert
             Assert.AreEqual("Product Stock Listing", result.ViewBag.Title);
