@@ -6,6 +6,7 @@ namespace PSL.UI
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            //global errors
             filters.Add(new HandleErrorAttribute());
         }
     }

@@ -8,6 +8,7 @@ namespace PSL.UI
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureServices(app);
             ConfigureAuth(app);
         }
     }

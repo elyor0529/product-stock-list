@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title | Products</title>
+    <title>@ViewBag.Title | @AppSettings.Title</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="@Url.Content("~/Assets/img/apple-icon-57x57.png")">
     <link rel="apple-touch-icon" sizes="60x60" href="@Url.Content("~/Assets/img/apple-icon-60x60.png")">
@@ -52,12 +52,15 @@
         </div>
     </div>
     <div class="container body-content">
+
         <h2>@ViewBag.Title.</h2>
 
         @RenderBody()
+
         <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - Products</p>
+            <p>&copy; @DateTime.Now.Year - @AppSettings.Title</p>
         </footer>
     </div>
 
