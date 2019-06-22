@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using PSL.UI.Core.Data;
 using PSL.UI.Core.Data.Entities;
 using PSL.UI.Core.Identity;
@@ -11,7 +10,7 @@ using PSL.UI.Core.Mvc;
 using PSL.UI.Models;
 
 namespace PSL.UI.Controllers
-{ 
+{
     public class AccountController : AuthController
     {
         private ApplicationSignInManager _signInManager;
@@ -34,7 +33,7 @@ namespace PSL.UI.Controllers
 
         [AllowAnonymous]
         public ActionResult Login()
-        { 
+        {
             return View();
         }
 
@@ -43,7 +42,8 @@ namespace PSL.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
 
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
@@ -51,6 +51,7 @@ namespace PSL.UI.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal();
+
                 default:
                     ModelState.AddModelError("", @"Invalid login attempt.");
                     return View(model);
@@ -70,7 +71,13 @@ namespace PSL.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -98,7 +105,7 @@ namespace PSL.UI.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            { 
+            {
                 if (_signInManager != null)
                 {
                     _signInManager.Dispose();

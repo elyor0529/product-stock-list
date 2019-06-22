@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using PSL.UI.Core.Data;
 using PSL.UI.Core.Mvc;
-using PSL.UI.Models;
 
 namespace PSL.UI.Controllers
 {
@@ -9,12 +8,10 @@ namespace PSL.UI.Controllers
     {
         public ProductController()
         {
-
         }
 
         public ProductController(ApplicationDbContext dbContext) : base(dbContext)
         {
-
         }
 
         public ActionResult Index()

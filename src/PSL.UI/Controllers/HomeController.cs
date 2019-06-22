@@ -7,7 +7,6 @@ namespace PSL.UI.Controllers
     {
         public HomeController()
         {
-            
         }
 
         public ActionResult Index()

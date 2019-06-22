@@ -4,10 +4,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using PSL.UI.Core.Data;
 using PSL.UI.Core.Data.Entities;
 using PSL.UI.Core.Identity;
-using PSL.UI.Models;
 
 namespace PSL.UI
 {
