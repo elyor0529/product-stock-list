@@ -23,7 +23,7 @@ namespace PSL.UI
 
             //css
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/assets/css/bootstrap.css", "~/assets/css/site.css"));
+                      "~/assets/css/bootstrap.css", "~/assets/css/loading.css", "~/assets/css/site.css"));
 
             //enable minify
             BundleTable.EnableOptimizations = true;

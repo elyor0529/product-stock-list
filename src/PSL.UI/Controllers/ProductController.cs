@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 using PSL.UI.Core.Data;
 using PSL.UI.Core.Mvc;
@@ -19,9 +21,25 @@ namespace PSL.UI.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var products = DbContext.Products.OrderByDescending(a=>a.Id).ToPagedList(page, 20);
+            var products = DbContext.Products.Where(w => w.Inventory > 0).Include(a => a.Orders).OrderByDescending(a => a.Orders.Count).ToPagedList(page, 20);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Listing", products);
+            }
 
             return View(products);
+        }
+
+        [HttpPost]
+        public ActionResult Get(int id)
+        {
+            if (!Request.IsAjaxRequest())
+                return Json(null, JsonRequestBehavior.AllowGet);
+
+            var product = DbContext.Products.Find(id);
+
+            return Json(product, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\InstanceConfig.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Core\Data\Entities\Order.cs" />
     <Compile Include="Core\Data\Entities\Product.cs" />
     <Compile Include="Core\Data\Infrastructure\EF\AuditEntity.cs" />
@@ -206,9 +207,11 @@
     <Content Include="Assets\css\bootstrap-theme.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\loading.css" />
     <Content Include="Assets\css\PagedList.css" />
-    <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\img\ajax-loader.gif" />
+    <Content Include="Assets\img\favicon.ico" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Assets\css\site.css" />
@@ -244,6 +247,8 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Views\Product\_Listing.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201906220714558_InitDb.resx">

@@ -1,5 +1,7 @@
 ﻿@model IPagedList<Product>
 @{
+    /**/
+
     ViewBag.Title = "List of Products";
 }
 
@@ -8,11 +10,101 @@
     <link href="~/Assets/css/PagedList.css" rel="stylesheet" />
 }
 
-<ul>
-    @foreach (var product in Model)
-    {
-     <li>@product.Name (@product.Inventory items are in stock)</li>
-    }
-</ul>
+<div id="grid1">
+    @Html.Partial("_Listing")
+</div>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<div class="modal fade" tabindex="-1" role="dialog" id="product-details">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Order Form</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="product-details-title">-</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p id="product-details-description">-</p>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Price</span>
+                                    <input type="text" class="form-control" readonly="readonly" id="product-details-price" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Quantity</span>
+                                    <input type="number" class="form-control" id="product-details-quantity" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <p class="text-right">
+                            Total: <span id="product-details-total"></span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        function addCard(id) {
+
+            ajax.fetchJson('@Url.Action("Get")/' + id, function(product) {
+
+                    $("#product-details-title").html(product.Name);
+                    $("#product-details-description").html(product.Description);
+
+                    $("#product-details-price").val(product.Price);
+                    $("#product-details-quantity").val('0');
+                    $("#product-details-total").html('0');
+
+                    $('#product-details').modal('show');
+
+                });
+        }
+
+        $(document).ready(function () {
+
+            $('#product-details').modal({
+                keyboard: false,
+                show:false
+            });
+
+            $(document).on('click', "#pager1 a", function (e) {
+
+                e.preventDefault();
+
+                var _ = $(this);
+
+                if (_.attr("href") !== undefined) {
+                    ajax.fetchHtml(_.attr("href"), "#grid1");
+                } else {
+                    ajax.fetchHtml("@Url.Action("Index")?page=" + _.html(), "#grid1");
+                }
+
+            });
+
+        });
+
+    </script>
+}
