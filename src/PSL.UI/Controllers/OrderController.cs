@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PSL.UI.Core;
@@ -10,6 +11,7 @@ using PSL.UI.Core.Data;
 using PSL.UI.Core.Data.Entities;
 using PSL.UI.Core.Identity;
 using PSL.UI.Core.Mvc;
+using PSL.UI.Helper;
 using PSL.UI.Models;
 using X.PagedList;
 
@@ -96,24 +98,28 @@ namespace PSL.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Add(int id, int quality)
+        [HttpPost]
+        public ActionResult Add(int productId, int quantity)
         {
             if (!Request.IsAjaxRequest())
                 return new EmptyResult();
 
-            var product = DbContext.Products.Find(id);
+            var product = DbContext.Products.Find(productId);
 
             if (product == null)
                 return HttpNotFound();
+             
+            if (quantity > product.Inventory)
+                return Json("Product quantity large than inventory count");
 
-            var totalPrice = quality * product.Price;
+            var totalPrice = quantity * product.Price;
             var userId = User.Identity.GetUserId();
 
             //add 
             DbContext.Orders.Add(new Order
             {
-                ProductId = id,
-                Quantity = quality,
+                ProductId = productId,
+                Quantity = quantity,
                 Price = totalPrice,
                 Date = DateTime.Now,
                 ClientId = userId,
@@ -139,6 +145,9 @@ namespace PSL.UI.Controllers
 
             //commit
             DbContext.SaveChanges();
+
+            //cache
+            WebCache.Remove(CacheHelper.OrderListingKey);
 
             return RedirectToAction("Index");
         }

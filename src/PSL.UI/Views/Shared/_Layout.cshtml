@@ -43,11 +43,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ProductListingActionLink()</li>
-                    
-                    @if (User.Identity.IsAuthenticated)
+
+                    @if (Request.IsAuthenticated)
                     {
                         <li>@Html.OrderListingActionLink()</li>
                     }
@@ -57,9 +57,12 @@
             </div>
         </div>
     </div>
+
+    <br />
+
     <div class="container body-content">
 
-        <h2>@ViewBag.Title.</h2>
+        <h2>@ViewBag.Title</h2>
 
         @RenderBody()
 

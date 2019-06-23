@@ -1,4 +1,5 @@
 ﻿@{
+    ViewBag.Title = "List of Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,7 +8,7 @@
     <link href="~/Assets/css/PagedList.css" rel="stylesheet" />
 }
 
-<ul class="nav nav-tabs" role="tablist">
+<ul class="nav nav-pills">
     <li role="presentation">
         <a href="@Url.Action("Index")">Active</a>
     </li>
@@ -15,6 +16,8 @@
         <a href="@Url.Action("History")">History</a>
     </li>
 </ul>
+
+<hr/>
 
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active">

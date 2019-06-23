@@ -1,5 +1,5 @@
 ﻿@model IPagedList<Product>
-@{  
+@{
     ViewBag.Title = "List of Products";
 }
 
@@ -23,6 +23,9 @@
             </div>
             <div class="modal-body">
 
+                <input type="hidden" id="product-details-id" />
+                <input type="hidden" id="product-details-inventory" />
+
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title" id="product-details-title">-</h3>
@@ -40,7 +43,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="input-group">
                                     <span class="input-group-addon">Quantity</span>
-                                    <input type="number" class="form-control" id="product-details-quantity" />
+                                    <input type="number" class="form-control" id="product-details-quantity" oninput="computeOrder()" />
                                 </div>
                             </div>
                         </div>
@@ -55,7 +58,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning">Order</button>
+                <button type="button" class="btn btn-warning" onclick="addCard()">Order</button>
             </div>
         </div>
     </div>
@@ -65,20 +68,71 @@
 {
     <script>
 
-        function addCard(id) {
+        function getCard(id) {
 
-            ajax.fetchJson('@Url.Action("Get")/' + id, function(product) {
+            ajax.fetchJson('@Url.Action("Get")/' + id,{}, function(product) {
 
+                    //labels
                     $("#product-details-title").html(product.Name);
                     $("#product-details-description").html(product.Description);
 
+                    //fields
+                    $("#product-details-id").val(product.Id);
+                    $("#product-details-inventory").val(product.Inventory);
                     $("#product-details-price").val(product.Price);
-                    $("#product-details-quantity").val('0');
-                    $("#product-details-total").html('0');
+                    $("#product-details-quantity").val(1);
+                    $("#product-details-total").html(product.Price);
 
+                    //modal
                     $('#product-details').modal('show');
 
-                });
+            });
+        }
+
+        function computeOrder() {
+            var quantity = $("#product-details-quantity").val();
+
+            if ( !quantity)
+                return;
+
+            var inventory = $("#product-details-inventory").val();
+            if (parseInt(quantity) > parseInt(inventory)) {
+
+                alert('Product quantity large than inventory count!');
+
+                return;
+            }
+
+            var price= $("#product-details-price").val();
+            var totalPrice = parseInt(quantity) * parseFloat(price);
+
+            $("#product-details-total").html(totalPrice.toFixed(2));
+
+        }
+
+        function addCard() {
+
+            var id = $("#product-details-id").val();
+            var quantity = $("#product-details-quantity").val();
+
+            if (!id || !quantity)
+                return;
+
+            var inventory = $("#product-details-inventory").val();
+
+            ajax.fetchJson('@Url.Action("Add","Order")',{ "productId": id, "quantity": quantity },function(data) {
+                    if (data == "ok") {
+
+                        var totalInventory = parseInt(inventory) - parseInt(quantity);
+
+                        $("#product-item-inventory-" + id).html(totalInventory);
+
+                        $('#product-details').modal('hide');
+                    } else {
+                        alert(data);
+                    }
+            });
+
         }
 
         $(document).ready(function () {

@@ -23,7 +23,7 @@ namespace PSL.UI.Migrations
         {
 
             //suppliers
-            context.Suppliers.AddOrUpdate(a => a.Id, new Supplier
+            context.Suppliers.AddOrUpdate(a => a.Name, new Supplier
             {
                 Name = "ABC Inc." 
             });
@@ -55,8 +55,8 @@ namespace PSL.UI.Migrations
                         Price = 162.50m
                     };
             }
-
-            context.Products.AddOrUpdate(a => a.Id, items);
+            context.Products.AddOrUpdate(a => a.Name, items);
+             
         }
     }
 }

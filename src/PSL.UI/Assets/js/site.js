@@ -23,13 +23,13 @@ ajax.fetchHtml = function (url, container) {
     });
 };
 
-ajax.fetchJson = function (url, callback) {
+ajax.fetchJson = function (url,data, callback) {
       
     $.ajax({
         url: url,
-        data: {},
+        data: JSON.stringify(data),
         type: "POST",
-        dataType: "json",
+        contentType: "application/json",
         beforeSend: function () {
             $("body").append('<div class="loading"></div>');
         },

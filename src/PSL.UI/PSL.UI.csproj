@@ -187,6 +187,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CacheHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Migrations\201906220714558_InitDb.cs" />
     <Compile Include="Migrations\201906220714558_InitDb.Designer.cs">
