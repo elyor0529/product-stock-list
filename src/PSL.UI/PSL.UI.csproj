@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201906231842419_PurchaseOrders.Designer.cs">
       <DependentUpon>201906231842419_PurchaseOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906232039128_BuyerPurchases.cs" />
+    <Compile Include="Migrations\201906232039128_BuyerPurchases.Designer.cs">
+      <DependentUpon>201906232039128_BuyerPurchases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -286,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906231842419_PurchaseOrders.resx">
       <DependentUpon>201906231842419_PurchaseOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232039128_BuyerPurchases.resx">
+      <DependentUpon>201906232039128_BuyerPurchases.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

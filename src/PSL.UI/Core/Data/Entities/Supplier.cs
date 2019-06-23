@@ -14,6 +14,6 @@ namespace PSL.UI.Core.Data.Entities
         [StringLength(50)]
         public string Name { get; set; }
 
-        public virtual ICollection<Purchase> Purchases { get; set; }
+        public virtual ICollection<Purchase> Purchases { get; set; }=new List<Purchase>();
     }
 }

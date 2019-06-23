@@ -17,7 +17,9 @@ namespace PSL.UI.Core.Data.Entities
             return userIdentity;
         }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+        public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
 
     }
 }

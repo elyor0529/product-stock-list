@@ -33,7 +33,7 @@ namespace PSL.UI.Controllers
             var userId = User.Identity.GetUserId();
             var orders = DbContext.Orders.Where(w => w.ClientId == userId).Include(a => a.Product).OrderByDescending(a => a.Date);
 
-            ViewBag.Suppliers = new SelectList(DbContext.Suppliers, "", "Name", "Id");
+            ViewBag.Suppliers = new SelectList(DbContext.Suppliers, "Id", "Name");
 
             return View(orders);
         }
@@ -41,7 +41,7 @@ namespace PSL.UI.Controllers
         public ActionResult History(int page = 1)
         {
             var userId = User.Identity.GetUserId();
-            var purchases = DbContext.Purchases.Where(w => w.BuyerId == userId).Include(a => a.Supplier).Include(a => a.PurchaseInOrders).OrderByDescending(a => a.Date).ToPagedList(page, 20);
+            var purchases = DbContext.Purchases.Where(w => w.BuyerId == userId).Include(a => a.Supplier).Include(a => a.PurchaseInOrders.Select(b=>b.Product)).OrderByDescending(a => a.Date).ToPagedList(page, 20);
 
             return View(purchases);
         }
@@ -109,7 +109,7 @@ namespace PSL.UI.Controllers
 
             if (product == null)
                 return HttpNotFound();
-             
+
             if (quantity > product.Inventory)
                 return Json("Product quantity large than inventory count");
 

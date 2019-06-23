@@ -21,9 +21,9 @@ namespace PSL.UI.Core.Data.Entities
 
         public int Inventory { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }=new List<Order>();
 
-        public virtual ICollection<PurchaseInOrder> PurchaseInOrders{ get; set; }
+        public virtual ICollection<PurchaseInOrder> PurchaseInOrders{ get; set; }=new List<PurchaseInOrder>();
 
     }
 }

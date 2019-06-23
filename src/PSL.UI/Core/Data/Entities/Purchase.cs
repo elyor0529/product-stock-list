@@ -24,7 +24,7 @@ namespace PSL.UI.Core.Data.Entities
 
         public decimal TotalAmount { get; set; }
 
-        public virtual ICollection<PurchaseInOrder> PurchaseInOrders { get; set; }
+        public virtual ICollection<PurchaseInOrder> PurchaseInOrders { get; set; }=new List<PurchaseInOrder>();
 
     }
 }

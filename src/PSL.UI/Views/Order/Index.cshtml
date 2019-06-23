@@ -9,7 +9,7 @@
             Suppliers
         </label>
         <div class="col-md-10">
-            @Html.DropDownList("SupplierId", (SelectList)ViewBag.Suppliers,new {@class = "form-control"})
+            @Html.DropDownList("SupplierId", (SelectList)ViewBag.Suppliers, new {@class = "form-control"})
         </div>
     </div>
 
@@ -35,7 +35,7 @@
                     </th>
                     <th></th>
                 </tr>
-
+                @{ var index = 0;}
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -52,11 +52,16 @@
                             @Html.DisplayFor(modelItem => item.Quantity)
                         </td>
                         <td>
-                            @Html.HiddenFor(a => item.ProductId)
-                            @Html.HiddenFor(a => item.Quantity)
+                            
+                            @Html.Hidden("items["+index+"].OrderId",item.Id)
+                            @Html.Hidden("items["+index+"].ProductId",item.ProductId)
+                            @Html.Hidden("items["+index+ "].Quantity", item.Quantity) 
+
                             @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", @onclick = "return confirm('Are you sure to delete?')" })
                         </td>
                     </tr>
+
+                    index++;
                 }
 
             </table>
