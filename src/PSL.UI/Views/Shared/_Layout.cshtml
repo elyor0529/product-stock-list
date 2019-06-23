@@ -45,11 +45,11 @@
                 <ul class="nav navbar-nav">
                     
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionProductListingLink()</li>
+                    <li>@Html.ProductListingActionLink()</li>
                     
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionOrderListingLink()</li>
+                        <li>@Html.OrderListingActionLink()</li>
                     }
 
                 </ul>

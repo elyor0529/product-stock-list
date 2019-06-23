@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link href="~/Assets/css/PagedList.css" rel="stylesheet" />
+}
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation">
+        <a href="@Url.Action("Index")">Active</a>
+    </li>
+    <li role="presentation">
+        <a href="@Url.Action("History")">History</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+        @RenderBody()
+    </div>
+</div>

@@ -17,7 +17,7 @@ namespace PSL.UI.Helper
         private const string ProductListingKey = "_product_listing_key";
         private const string OrderListingKey = "_order_{0}_listing_key";
 
-        public static MvcHtmlString ActionProductListingLink(this HtmlHelper helper)
+        public static MvcHtmlString ProductListingActionLink(this HtmlHelper helper)
         {
             var count = (int?)WebCache.Get(ProductListingKey);
 
@@ -31,7 +31,7 @@ namespace PSL.UI.Helper
 
                 using (var db = request.GetOwinContext().Get<ApplicationDbContext>())
                 {
-                    count = db.Products.Count(a => a.Inventory > 0);
+                    count = db.Products.Count();
 
                     WebCache.Set(ProductListingKey, count);
 
@@ -40,7 +40,7 @@ namespace PSL.UI.Helper
             }
         }
 
-        public static MvcHtmlString ActionOrderListingLink(this HtmlHelper helper)
+        public static MvcHtmlString OrderListingActionLink(this HtmlHelper helper)
         {
             var request = helper.ViewContext.RequestContext.HttpContext;
             var userId = request.User.Identity.GetUserId();

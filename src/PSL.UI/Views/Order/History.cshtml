@@ -1,0 +1,48 @@
+﻿@model IPagedList<Purchase> 
+
+<div class="row">
+    @foreach (var purchase in Model.GroupBy(a => a.Date.Date))
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">@purchase.Key.ToLongDateString()</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                                <th>Orders</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var supplier in purchase)
+                            {
+                                <tr>
+                                    <td>@supplier.Supplier.Name</td>
+                                    <td>
+                                        <ul class="list-group">
+                                            @foreach (var order in supplier.PurchaseInOrders)
+                                            {
+                                                <li class="list-group-item">
+                                                    <span class="badge">@order.Quantity</span>
+                                                    @order.Product.Name
+                                                </li>
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <p class="text-right">Total:@purchase.Sum(a => a.TotalAmount)</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center" id="pager1">
+    @Html.PagedListPager(Model, page => Url.Action("History", new { page }))
+</div>

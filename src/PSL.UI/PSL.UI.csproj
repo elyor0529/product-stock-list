@@ -164,6 +164,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Core\Data\Entities\Order.cs" />
     <Compile Include="Core\Data\Entities\Product.cs" />
+    <Compile Include="Core\Data\Entities\Purchase.cs" />
+    <Compile Include="Core\Data\Entities\PurchaseInOrder.cs" />
+    <Compile Include="Core\Data\Entities\Supplier.cs" />
     <Compile Include="Core\Data\Infrastructure\EF\AuditEntity.cs" />
     <Compile Include="Core\Data\Infrastructure\EF\FactoryEntity.cs" />
     <Compile Include="Core\Data\Infrastructure\IModel.cs" />
@@ -193,7 +196,21 @@
     <Compile Include="Migrations\201906221005026_PrepareProductAndOrder.Designer.cs">
       <DependentUpon>201906221005026_PrepareProductAndOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906231810568_OrderChekoutSuppliers.cs" />
+    <Compile Include="Migrations\201906231810568_OrderChekoutSuppliers.Designer.cs">
+      <DependentUpon>201906231810568_OrderChekoutSuppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906231822036_BuyerIdOnPurchases.cs" />
+    <Compile Include="Migrations\201906231822036_BuyerIdOnPurchases.Designer.cs">
+      <DependentUpon>201906231822036_BuyerIdOnPurchases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906231842419_PurchaseOrders.cs" />
+    <Compile Include="Migrations\201906231842419_PurchaseOrders.Designer.cs">
+      <DependentUpon>201906231842419_PurchaseOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Core\Data\Entities\ApplicationUser.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
@@ -249,6 +266,9 @@
     </Content>
     <Content Include="Views\Product\_Listing.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\History.cshtml" />
+    <Content Include="Views\Order\_ViewStart.cshtml" />
+    <Content Include="Views\Order\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201906220714558_InitDb.resx">
@@ -256,6 +276,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906221005026_PrepareProductAndOrder.resx">
       <DependentUpon>201906221005026_PrepareProductAndOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906231810568_OrderChekoutSuppliers.resx">
+      <DependentUpon>201906231810568_OrderChekoutSuppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906231822036_BuyerIdOnPurchases.resx">
+      <DependentUpon>201906231822036_BuyerIdOnPurchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906231842419_PurchaseOrders.resx">
+      <DependentUpon>201906231842419_PurchaseOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

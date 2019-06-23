@@ -21,7 +21,7 @@ namespace PSL.UI.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var products = DbContext.Products.Where(w => w.Inventory > 0).Include(a => a.Orders).OrderByDescending(a => a.Orders.Count).ToPagedList(page, 20);
+            var products = DbContext.Products.Include(a => a.Orders).OrderByDescending(a => a.Orders.Count).ToPagedList(page, 20);
 
             if (Request.IsAjaxRequest())
             {
@@ -35,9 +35,12 @@ namespace PSL.UI.Controllers
         public ActionResult Get(int id)
         {
             if (!Request.IsAjaxRequest())
-                return Json(null, JsonRequestBehavior.AllowGet);
+                return new EmptyResult();
 
             var product = DbContext.Products.Find(id);
+
+            if (product == null)
+                return HttpNotFound();
 
             return Json(product, JsonRequestBehavior.AllowGet);
         }

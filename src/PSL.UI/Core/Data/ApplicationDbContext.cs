@@ -24,6 +24,10 @@ namespace PSL.UI.Core.Data
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Supplier> Suppliers { get; set; }
+
+        public DbSet<Purchase> Purchases { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

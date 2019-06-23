@@ -23,5 +23,7 @@ namespace PSL.UI.Core.Data.Entities
 
         public virtual ICollection<Order> Orders { get; set; }
 
+        public virtual ICollection<PurchaseInOrder> PurchaseInOrders{ get; set; }
+
     }
 }
