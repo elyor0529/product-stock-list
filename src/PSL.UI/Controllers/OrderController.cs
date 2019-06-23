@@ -7,6 +7,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PSL.UI.Core;
+using PSL.UI.Core.Caching;
 using PSL.UI.Core.Data;
 using PSL.UI.Core.Data.Entities;
 using PSL.UI.Core.Identity;
@@ -147,7 +148,8 @@ namespace PSL.UI.Controllers
             DbContext.SaveChanges();
 
             //cache
-            WebCache.Remove(CacheHelper.OrderListingKey);
+            var userId = User.Identity.GetUserId();
+            ProductCache.ClearOrders(userId);
 
             return RedirectToAction("Index");
         }

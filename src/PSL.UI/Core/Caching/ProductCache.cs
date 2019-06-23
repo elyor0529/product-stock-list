@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Helpers;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+using System.Web.UI.WebControls;
 using PSL.UI.Core.Data;
 
-namespace PSL.UI.Helper
+namespace PSL.UI.Core.Caching
 {
-    public static class CacheHelper
+    public static class ProductCache
     {
 
-        public const string ProductListingKey = "_product_listing_key";
-        public const string OrderListingKey = "_order_{0}_listing_key";
+        private const string ProductListingKey = "_product_listing_key";
+        private const string OrderListingKey = "_order_{0}_listing_key";
 
         public static int? ProductListingCount()
         {
@@ -50,6 +44,13 @@ namespace PSL.UI.Helper
             }
 
             return count;
+        }
+
+        public static void ClearOrders(string userId)
+        {
+            var cacheKey = string.Format(OrderListingKey, userId);
+
+            WebCache.Remove(cacheKey);
         }
 
     }

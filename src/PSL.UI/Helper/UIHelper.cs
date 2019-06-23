@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PSL.UI.Core.Caching;
 using PSL.UI.Core.Data;
 
 namespace PSL.UI.Helper
@@ -16,7 +17,7 @@ namespace PSL.UI.Helper
 
         public static MvcHtmlString ProductListingActionLink(this HtmlHelper helper)
         {
-            var count = CacheHelper.ProductListingCount();
+            var count = ProductCache.ProductListingCount();
 
             return helper.ActionLink($"Products({count})", "Index", "Product");
         }
@@ -25,7 +26,7 @@ namespace PSL.UI.Helper
         {
             var request = helper.ViewContext.RequestContext.HttpContext;
             var userId = request.User.Identity.GetUserId();
-            var count = CacheHelper.OrderListingCount(userId);
+            var count = ProductCache.OrderListingCount(userId);
 
             return helper.ActionLink($"Orders({count})", "Index", "Order");
         }
